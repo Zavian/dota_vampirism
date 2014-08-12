@@ -26,7 +26,9 @@ function Activate()
 
 	--game rules section
 	--add here to maintain order
-	GameRules:SetHeroRespawnEnabled(false)
+	--GameRules:SetHeroRespawnEnabled(false)
+	GameRules:SetSameHeroSelectionEnabled(true)
+
 end
 
 function VampirismGameMode:InitGameMode()
@@ -43,8 +45,16 @@ function VampirismGameMode:InitGameMode()
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(VampirismGameMode, 'OnEntityKilled'), self)
 	print("[BRAIN] Looking for dead ppl")
 
+	--ListenToGameEvent('player_spawn', Dynamic_Wrap(VampirismGameMode, 'OnPlayerSpawn'), self)
+
 	print("")
 end
+
+--function VampirismGameMode:OnPlayerSpawn(keys)
+--	print("")
+--	PrintTable(keys, nil, nil)
+--	print("")
+--end
 
 -- Evaluate the state of the game
 function VampirismGameMode:OnThink()
@@ -61,7 +71,10 @@ end
 --	local id = keys.PlayerID
 --	print(id)
 --	print(PlayerResource:GetTeam(id))
---end	
+--end
+
+
+
 
 function VampirismGameMode:OnEntityKilled(keys) 
 
@@ -70,9 +83,14 @@ function VampirismGameMode:OnEntityKilled(keys)
 	--This gets fired when an entity is killed.
 	--Its purpose it's to get a farmer to a vampire, but for now it will do nothing...
 	--TODO: Check if the entity it's a hero or a summoned creature (like a worker)
-
+	PrintTable(keys, nil, nil)
+	print("")
 	local id = keys.entindex_killed
 	print("[OnEntityKilled] "..id.." fired the event...")
+
+	print("")
+	PrintTable(Entities:FindAllModel("npc_dota_hero_night_stalker"), nil, nil)
+	print("")
 
 	hscript  = EntIndexToHScript(id)
 	player = hscript:GetPlayerID()
@@ -86,16 +104,21 @@ function VampirismGameMode:OnEntityKilled(keys)
 
 	print("[OnEntityKilled] The dead model is ".. model)
 
-	print("")
+	local replaced = false
+	if (hscript and hscript:IsRealHero() and model == MODEL_OMNI and team == TEAM_RADIANT) then	
+		hscript:SetTeam(TEAM_DIRE)
+		
+		print("")
+		PrintTable(Entities:FindAllModel("npc_dota_hero_night_stalker"), nil, nil)
+		print("")
+		
+		print("[OnEntityKilled] A player has been killed. Changed its model and faction")
 
-	if hscript and hscript:IsRealHero() then
-		local newItem = CreateItem( "item_tombstone", hscript, hscript )
-		newItem:SetPurchaseTime( 0 )
-		newItem:SetPurchaser( hscript )
-		local tombstone = SpawnEntityFromTableSynchronous( "dota_item_tombstone_drop", {} )
-		tombstone:SetContainedItem( newItem )
-		tombstone:SetAngles( 0, RandomFloat( 0, 360 ), 0 )
-		FindClearSpaceForUnit( tombstone, hscript:GetAbsOrigin(), true )
+	elseif (hscript and hscript:IsRealHero() and model == MODEL_NIGHT and team == TEAM_DIRE) then
+		GameRules:SendCustomMessage("You have killed a Vampire!", TEAM_RADIANT, 1)
+		GameRules:SendCustomMessage("A Vampire has been killed!", TEAM_DIRE, 1)
+		print("[OnEntityKilled] A Vampire died. Damn you...")
+
 	end
 
 
@@ -133,6 +156,7 @@ function VampirismGameMode:OnEntityKilled(keys)
 	--	hscript:SetModel(MODEL_OMNI)
 	--	hscript:SetModelScale(1.1)
 	--end
+
 	print("")
 end	
 
@@ -157,7 +181,6 @@ function VampirismGameMode:HandleEventError(name, event, err)
   if not self.errorHandled then
     -- Store that we handled an error
     self.errorHandled = true
-
     -- End the gamemode
     --self:EndGamemode()
   end
