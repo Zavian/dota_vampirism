@@ -1,11 +1,11 @@
--- Guesses on factions:
+--Factions
 -- 1 = Neutral
 -- 2 = Radiant
 -- 3 = Dire
 -- 4 = Events?
 -- 5 = ???
 
-
+--Spell with test purposes
 function OnSpellStart(keys)
 	local caster = keys.caster
 	local team = caster:GetTeam()

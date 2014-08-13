@@ -47,7 +47,7 @@
 
 			"SpawnUnit"
 			{
-				"UnitName"			"npc_dota_creep_badguys_melee"
+				"UnitName"			"npc_dota_hero_life_stealer"
 				"UnitCount"			"3"
 				"SpawnRadius"		"100"
 				"Duration"			"15"
@@ -186,5 +186,52 @@
 			}
 		}
 	}
+
+	//=================================================================================================================
+	// Become Ghoul
+	//=================================================================================================================
+	"death_prophet_become_ghoul"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELED"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+
+		"AbilityChannelTime"			"3"
+		"AbilityTextureName"			"become_ghoul"
+		"ItemBaseLevel"					"0"
+		"MaxLevel"						"1"
+
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/datadriven/become_ghoul.lua"
+				"Function"		"OnSpellStart"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/datadriven/become_ghoul.lua"
+				"Function"		"OnChannelSucceded"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Become Ghoul
+	//=================================================================================================================
+	"empty_spell"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+
 
 }

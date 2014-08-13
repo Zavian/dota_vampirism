@@ -3,6 +3,7 @@
 require('util')
 require('vampirism')
 
+
 if VampirismGameMode == nil then
 	VampirismGameMode = class({})
 end
@@ -14,7 +15,10 @@ function Precache( context )
 			PrecacheResource( "soundfile", "*.vsndevts", context )
 			PrecacheResource( "particle", "*.vpcf", context )
 			PrecacheResource( "particle_folder", "particles/folder", context )
+
 	]]
+
+	PrecacheUnitByNameAsync(DEATHPROPHET, context)
 
 end
 
@@ -64,6 +68,7 @@ function VampirismGameMode:OnThink()
 		return nil
 	end
 
+
 	return 1
 end
 
@@ -88,9 +93,6 @@ function VampirismGameMode:OnEntityKilled(keys)
 	local id = keys.entindex_killed
 	print("[OnEntityKilled] "..id.." fired the event...")
 
-	print("")
-	PrintTable(Entities:FindAllModel("npc_dota_hero_night_stalker"), nil, nil)
-	print("")
 
 	hscript  = EntIndexToHScript(id)
 	player = hscript:GetPlayerID()
@@ -98,21 +100,16 @@ function VampirismGameMode:OnEntityKilled(keys)
 	model = hscript:GetModelName()
 	team = hscript:GetTeam()
 
-	--if(isPlayer) then print("[OnEntityKilled] ..and that's a player!")
-	--else print("[OnEntityKilled] ...and it's gone.")
-	--end
+
 
 	print("[OnEntityKilled] The dead model is ".. model)
 
 	local replaced = false
 	if (hscript and hscript:IsRealHero() and model == MODEL_OMNI and team == TEAM_RADIANT) then	
-		hscript:SetTeam(TEAM_DIRE)
-		
-		print("")
-		PrintTable(Entities:FindAllModel("npc_dota_hero_night_stalker"), nil, nil)
-		print("")
-		
-		print("[OnEntityKilled] A player has been killed. Changed its model and faction")
+		PlayerResource:ReplaceHeroWith(player, LIFESTEALER, 0, 0)
+		player = FindAllByClassname(LIFESTEALER)[0]
+		PrintTable(player, nil, nil)
+		print("[OnEntityKilled] A player has been killed. Changed its model.")
 
 	elseif (hscript and hscript:IsRealHero() and model == MODEL_NIGHT and team == TEAM_DIRE) then
 		GameRules:SendCustomMessage("You have killed a Vampire!", TEAM_RADIANT, 1)
@@ -120,42 +117,6 @@ function VampirismGameMode:OnEntityKilled(keys)
 		print("[OnEntityKilled] A Vampire died. Damn you...")
 
 	end
-
-
-	if(model == MODEL_OMNI and team == TEAM_RADIANT) then
-		--hscript:SetTeam(6)
-		--print(hscript:GetContext("position")) --[[Returns:Vector
-		--Returns the supplied position moved to the ground. Second parameter is an NPC for measuring movement collision hull offset.
-		--]]
-		--hscript:SetOwner(nil)
-
-		--hscript:SetModel(nil)
-		--hscript:SetModel(MODEL_NIGHT)
-		--hscript:SetModelScale(0.7)
-		--local hero = PlayerResource:ReplaceHeroWith(playerID, 'npc_dota_hero_invoker', 0, 0)
-		--PlayerResource:ReplaceHeroWith(player, "npc_dota_hero_night_stalker", 0, 0)
-		--print("[DEBUG] Trying to create the hero.")
-		--test = CreateHeroForPlayer("dota_hero_night_stalker", hscript)  --crashes everything...
-		--print("[DEBUG] Hero created!")
-		--print(test)
-
-
-	elseif (model == MODEL_NIGHT and team == TEAM_DIRE) then
-		Msg("Banana!")
-	end
-
-
-	--if(team == TEAM_RADIANT) then --radiant dead
-	--	hscript:SetTeam(TEAM_DIRE)
-	--	hscript:SetModel(nil)
-	--	hscript:SetModel(MODEL_NIGHT)
-	--	hscript:SetModelScale(0.7)
-	--elseif(team == TEAM_DIRE) then --dire dead
-	--	hscript:SetTeam(TEAM_RADIANT)
-	--	hscript:SetModel(nil)
-	--	hscript:SetModel(MODEL_OMNI)
-	--	hscript:SetModelScale(1.1)
-	--end
 
 	print("")
 end	
