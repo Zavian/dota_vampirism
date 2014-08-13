@@ -1,0 +1,22 @@
+Vampirism Domination
+
+The game is like Vampirism Fire but there is a new mechanics that will overide the ghoul one:
+	When the player dies he can choose between two choices:
+	1.	He can spectate the game, nothing else.
+	2.	He can become a life protector (maybe treant?) and give the ability to the Vampire to summon a ghoul that can help him in fight.
+		The life protector has these abilities:
+			First of all, there is no real purpose to kill the LP other than take him off for 3 mins
+			He can oneshot one ghoul and the spell has same/more cd than the summon_ghoul. This will grant the LP an armor and attack bonus (stacks up)
+			His blink ability is nerfed, or it could be a real pain in the ass...
+
+	Obviously the Vampire will get some bonuses too:
+		As said above, he can summon a ghoul, max 2 which will work as dominated creeps (they'll have a duration, dunno how much)
+		When he kills a player he gains the possibility to summon a ghoul. 
+		So when he gets his third victim he will pass the ghoul ability to the other Vampire (so, logically, there will be max 4 ghouls)
+		Also, the first time he gets the ability to summon the ghoul he will get the ability to banish a LP which will help him not to feed him
+
+
+Also, there is a little edit for the endgame:
+	When the Vampire will conjure his 4th victim he will go nuts and after 8 mins after the 4th kill he'll gain some sort of ability to kinda deny the LPs
+
+Remember, this is just a concept, and prolly it'll change.

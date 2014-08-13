@@ -13,11 +13,15 @@ function OnChannelSucceded(keys)
 
 	print("[DATADRIVEN] Changing caster's team to "..TEAM_DIRE)
 	local table = Entities:FindByClassname(nil, LIFESTEALER)
-	
+
 	if(table and table:GetTeam() == TEAM_RADIANT) then
 		table:SetTeam(TEAM_DIRE)
+		--table:SetTeam(TEAM_DIRE)
 		print("[DATADRIVEN] Success")
 		--PrintTable(table, nil, nil)
+
+		table = Entities:FindByClassname(nil, LIFESTEALER)
+		print(table:GetTeam())
 	end
 
 	print("")
