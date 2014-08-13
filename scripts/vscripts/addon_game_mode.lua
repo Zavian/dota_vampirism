@@ -89,7 +89,7 @@ end
 
 function VampirismGameMode:OnEntityKilled(keys) 
 	--This gets fired when an entity is killed.
-	
+
 	local id = keys.entindex_killed
 	print("[OnEntityKilled] "..id.." fired the event...")
 
@@ -106,6 +106,12 @@ function VampirismGameMode:OnEntityKilled(keys)
 	if (hscript and hscript:IsRealHero() and model == MODEL_OMNI and team == TEAM_RADIANT) then	
 		PlayerResource:ReplaceHeroWith(player, DEATHPROPHET, 0, 0)		
 		print("[OnEntityKilled] A player has been killed. Changed its model.")
+
+		local table = Entities:FindByClassname(nil, DEATHPROPHET)
+		if(table and table:GetTeam() == TEAM_RADIANT) then
+			local ability = table:FindAbilityByName("death_prophet_become_ghoul")
+			ability:UpgradeAbility()
+		end
 
 	elseif (hscript and hscript:IsRealHero() and model == MODEL_NIGHT and team == TEAM_DIRE) then
 		GameRules:SendCustomMessage("You have killed a Vampire!", TEAM_RADIANT, 1)
