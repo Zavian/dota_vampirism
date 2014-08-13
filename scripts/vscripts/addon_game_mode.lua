@@ -3,6 +3,8 @@
 require('util')
 require('vampirism')
 
+--PrecacheUnitByName('npc_precache_everything')
+
 
 if VampirismGameMode == nil then
 	VampirismGameMode = class({})
@@ -17,8 +19,12 @@ function Precache( context )
 			PrecacheResource( "particle_folder", "particles/folder", context )
 
 	]]
+	PrecacheModel(MODEL_DEATH, context)
+	PrecacheModel(MODEL_OMNI, context)
+	PrecacheModel(MODEL_NIGHT, context)
+	PrecacheModel(MODEL_LIFE, context)
 
-	PrecacheUnitByNameAsync(DEATHPROPHET, context)
+	print("[VAMPIRISM] Precached")
 
 end
 
@@ -82,14 +88,8 @@ end
 
 
 function VampirismGameMode:OnEntityKilled(keys) 
-
-	--local killedUnit = EntIndexToHScript( keys.entindex_killed )
-
 	--This gets fired when an entity is killed.
-	--Its purpose it's to get a farmer to a vampire, but for now it will do nothing...
-	--TODO: Check if the entity it's a hero or a summoned creature (like a worker)
-	PrintTable(keys, nil, nil)
-	print("")
+	
 	local id = keys.entindex_killed
 	print("[OnEntityKilled] "..id.." fired the event...")
 
@@ -103,12 +103,8 @@ function VampirismGameMode:OnEntityKilled(keys)
 
 
 	print("[OnEntityKilled] The dead model is ".. model)
-
-	local replaced = false
 	if (hscript and hscript:IsRealHero() and model == MODEL_OMNI and team == TEAM_RADIANT) then	
-		PlayerResource:ReplaceHeroWith(player, LIFESTEALER, 0, 0)
-		player = FindAllByClassname(LIFESTEALER)[0]
-		PrintTable(player, nil, nil)
+		PlayerResource:ReplaceHeroWith(player, DEATHPROPHET, 0, 0)		
 		print("[OnEntityKilled] A player has been killed. Changed its model.")
 
 	elseif (hscript and hscript:IsRealHero() and model == MODEL_NIGHT and team == TEAM_DIRE) then
