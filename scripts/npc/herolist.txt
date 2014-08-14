@@ -9,4 +9,5 @@
 	"npc_dota_hero_night_stalker" 	"-1"
 	"npc_dota_hero_death_prophet"	"-1"
 	"npc_dota_hero_life_stealer"	"-1"
+	"npc_dota_hero_treant"	"-1"
 }

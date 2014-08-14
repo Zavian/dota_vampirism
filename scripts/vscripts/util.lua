@@ -37,3 +37,27 @@ function PrintTable(t, indent, done)
         end
     end
 end
+
+function addKiller(KillerID)
+    KILLERS[KillerIndex] = KillerID
+    KillerIndex = KillerIndex + 1
+    print("[UTIL] A new killer came")
+end
+
+function SearchForSecondKiller(SuspectTable, KnownKiller)
+    if(table.getn(KILLERS) == 2) then
+        if(KILLERS[0] == KnownKiller) then return KILLERS[1]
+        else return KILLERS[0]
+        end
+    else
+        if(SuspectTable[0] == KnownKiller) then return SuspectTable[1]
+        else return SuspectTable[0]
+        end
+    end
+end
+
+function RemoveEmptySpell(entity)
+    if(entity:FindAbilityByName("empty_spell")) then entity:RemoveAbility("empty_spell") end
+    print("[UTIL] Spell removed")
+end
+

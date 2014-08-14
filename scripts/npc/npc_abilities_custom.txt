@@ -1,10 +1,102 @@
-// Dota Heroes File
+// Vampirism Domination Abilities
 "DOTAAbilities"
 {
 	"Version"		"1"
+	//=================================================================================================================
+	// empty_spell
+	//=================================================================================================================
+	"empty_spell"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+
 
 	//=================================================================================================================
+	// Become Life Protector
+	//=================================================================================================================
+	"death_prophet_become_life_protector"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELED"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+
+		"AbilityChannelTime"			"3"
+		"AbilityTextureName"			"become_life_protector"
+		"ItemBaseLevel"					"0"
+		"MaxLevel"						"1"
+
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/datadriven/become_life_protector.lua"
+				"Function"		"OnSpellStart"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/datadriven/become_life_protector.lua"
+				"Function"		"OnChannelSucceded"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Banish Life Protector
+	//=================================================================================================================
+	"banish_life_protector"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"MaxLevel"						"4"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "summon_ghoul"
+	}
+
+	//=================================================================================================================
+	// Summon Ghoul 1
+	//=================================================================================================================
+	"summon_ghoul_1"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"MaxLevel"						"4"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "summon_ghoul"
+	}
+
+	//=================================================================================================================
+	// Summon Ghoul 2
+	//=================================================================================================================
+	"summon_ghoul_2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"MaxLevel"						"4"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "summon_ghoul"
+	}
+
+
+
+	
+
+
+	
+	//=================================================================================================================
 	// Omniknight Summon house
+	// Test purposes
 	//=================================================================================================================
 	"omniknight_summon_angel"
 	{
@@ -161,77 +253,5 @@
 			}
 		}
 	}
-
-	//=================================================================================================================
-	// Change Faction
-	//=================================================================================================================
-	"test_change_faction"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-
-
-		"AbilityTextureName"			"omniknight_guardian_angel"
-		"ItemBaseLevel"					"0"
-		
-		"BaseClass"						"ability_datadriven"
-		
-
-		"MaxLevel"						"4"	
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/datadriven/change_faction.lua"
-				"Function"		"OnSpellStart"
-			}
-		}
-	}
-
-	//=================================================================================================================
-	// Become Ghoul
-	//=================================================================================================================
-	"death_prophet_become_ghoul"
-	{
-		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELED"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-
-		"AbilityChannelTime"			"3"
-		"AbilityTextureName"			"become_ghoul"
-		"ItemBaseLevel"					"0"
-		"MaxLevel"						"1"
-
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/datadriven/become_ghoul.lua"
-				"Function"		"OnSpellStart"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/datadriven/become_ghoul.lua"
-				"Function"		"OnChannelSucceded"
-			}
-		}
-	}
-
-	//=================================================================================================================
-	// Become Ghoul
-	//=================================================================================================================
-	"empty_spell"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"MaxLevel"						"0"
-		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"            "rubick_empty1"
-	}
-
 
 }

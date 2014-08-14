@@ -3,7 +3,6 @@
 require('util')
 require('vampirism')
 
---PrecacheUnitByName('npc_precache_everything')
 
 
 if VampirismGameMode == nil then
@@ -19,12 +18,20 @@ function Precache( context )
 			PrecacheResource( "particle_folder", "particles/folder", context )
 
 	]]
-	PrecacheModel(MODEL_DEATH, context)
-	PrecacheModel(MODEL_OMNI, context)
-	PrecacheModel(MODEL_NIGHT, context)
-	PrecacheModel(MODEL_LIFE, context)
+	--PrecacheModel("models/heroes/nightstalker/nightstalker.vmdl", context)
+	--PrecacheModel("models/heroes/omniknight/omniknight.vmdl", context)
+	--PrecacheModel("models/heroes/death_prophet/death_prophet.vmdl", context)
+	--PrecacheModel("models/heroes/life_stealer/life_stealer.vmdl", context)
+	--PrecacheModel(TREANT, context)
 
-	print("[VAMPIRISM] Precached")
+
+	--This will precache all the models I want
+	--From the ALL array
+	for i=1, table.getn(ALL) do
+		PrecacheUnitByNameSync(ALL[i], context)
+		--print(ALL[i])
+	end
+	print("[VAMPIRISM] Precached all")
 
 end
 
@@ -44,7 +51,7 @@ end
 function VampirismGameMode:InitGameMode()
 	--load util
 	--load vampirism
-	print( "[VAMPIRISM] Game loaded." )
+	print( "[VAMPIRISM] Game loaded" )
 	print("")
 
 	--loading the thinkers and listeners
@@ -89,12 +96,13 @@ end
 
 function VampirismGameMode:OnEntityKilled(keys) 
 	--This gets fired when an entity is killed.
+	--PrintTable(keys, nil, nil)
 
 	local id = keys.entindex_killed
+	local killer = keys.entindex_attacker
 	print("[OnEntityKilled] "..id.." fired the event...")
-
-
 	hscript  = EntIndexToHScript(id)
+	
 	player = hscript:GetPlayerID()
 	isPlayer = hscript:IsPlayer()
 	model = hscript:GetModelName()
@@ -104,12 +112,14 @@ function VampirismGameMode:OnEntityKilled(keys)
 
 	print("[OnEntityKilled] The dead model is ".. model)
 	if (hscript and hscript:IsRealHero() and model == MODEL_OMNI and team == TEAM_RADIANT) then	
+		addKiller(killer)
+		
 		PlayerResource:ReplaceHeroWith(player, DEATHPROPHET, 0, 0)		
 		print("[OnEntityKilled] A player has been killed. Changed its model.")
 
 		local table = Entities:FindByClassname(nil, DEATHPROPHET)
 		if(table and table:GetTeam() == TEAM_RADIANT) then
-			local ability = table:FindAbilityByName("death_prophet_become_ghoul")
+			local ability = table:FindAbilityByName("death_prophet_become_life_protector")
 			ability:UpgradeAbility()
 		end
 

@@ -96,10 +96,11 @@
 
 		"precache"
 		{
-			"model"			"models/heroes/nightstalker/nightstalker.mdl"
-			"model"			"models/heroes/death_prophet/death_prophet.mdl"
-			"model"			"models/heroes/life_stealer/life_stealer.mdl"
-			"model"			"models/heroes/omniknight/omniknight.mdl"
+			"model"			"models/heroes/nightstalker/nightstalker.vmdl"
+			"model"			"models/heroes/death_prophet/death_prophet.vmdl"
+			"model"			"models/heroes/life_stealer/life_stealer.vmdl"
+			"model"			"models/heroes/omniknight/omniknight.vmdl"
+			"model"			"models/heroes/treant_protector/treant_protector.vmdl"
 
 			
 			//"model"			"models/development/invisiblebox.mdl"
