@@ -108,12 +108,12 @@ function VampirismGameMode:OnEntityKilled(keys)
 	model = hscript:GetModelName()
 	team = hscript:GetTeam()
 
-
+	
 
 	print("[OnEntityKilled] The dead model is ".. model)
 	if (hscript and hscript:IsRealHero() and model == MODEL_OMNI and team == TEAM_RADIANT) then	
 		addKiller(killer)
-		
+
 		PlayerResource:ReplaceHeroWith(player, DEATHPROPHET, 0, 0)		
 		print("[OnEntityKilled] A player has been killed. Changed its model.")
 

@@ -2,6 +2,15 @@ print("[VAMPIRISM] Lua loaded")
 TEAM_DIRE		= 3
 TEAM_RADIANT 	= 2
 
+--local creature = CreateUnitByName(NIGHTSTALKER, caster:GetAbsOrigin(), true, nil, nil, TEAM_DIRE) 
+--creature:SetOwner(PlayerResource:GetPlayer(0))
+
+--print(caster:GetPlayerOwner())
+--print(creature:GetPlayerOwner())
+--player = PlayerResource:GetPlayer(0)
+--caster:SetTeam(TEAM_DIRE)
+--player:SetTeam(TEAM_DIRE)
+
 
 MODEL_DEATH 	= "models/heroes/death_prophet/death_prophet.vmdl"
 MODEL_LIFE 		= "models/heroes/life_Stealer/life_Stealer.vmdl"

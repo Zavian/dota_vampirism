@@ -13,7 +13,7 @@ The game is like Vampirism Fire but there is a new mechanics that will overide t
 		As said above, he can summon a ghoul, max 2 which will work as dominated creeps (they'll have a duration, dunno how much)
 		When he kills a player he gains the possibility to summon a ghoul. 
 		So when he gets his third victim he will pass the ghoul ability to the other Vampire (so, logically, there will be max 4 ghouls)
-		Also, the first time he gets the ability to summon the ghoul he will get the ability to banish a LP which will help him not to feed him
+		Also, the first time he gets the ability to summon the ghoul he will get the ability to banish a LP which will help him not to feed him (longer cd than the summon)
 
 
 Also, there is a little edit for the endgame:
