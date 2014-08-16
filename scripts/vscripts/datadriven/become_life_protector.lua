@@ -16,9 +16,9 @@ function OnChannelSucceded(keys)
 	local stalkers = Entities:FindAllByClassname(NIGHTSTALKER)
 	if(stalkers) then
 		for i = 1, table.getn(stalkers) do
-			RemoveEmptySpell(stalkers[i])
-			if(not stalkers[i]:FindAbilityByName("banish_life_protector")) then
-				stalkers[i]:AddAbility("banish_life_protector")
+			--RemoveEmptySpell(stalkers[i])
+			if(stalkers[i]:FindAbilityByName("banish_life_protector"):GetLevel() == 0) then
+				stalkers[i]:FindAbilityByName("banish_life_protector"):UpgradeAbility()
 			else break
 			end
 		end
@@ -36,7 +36,7 @@ function OnChannelSucceded(keys)
 					else whoToBuff = stalkers[1]
 					end
 					--whoToBuff = EntIndexToHScript(whoToBuff)
-					RemoveEmptySpell(whoToBuff)
+					--RemoveEmptySpell(whoToBuff)
 					if(whoToBuff:FindAbilityByName("summon_ghoul")) then 
 						--Give the second level of the summon ghoul
 						whoToBuff:FindAbilityByName("summon_ghoul"):UpgradeAbility()
@@ -53,7 +53,7 @@ function OnChannelSucceded(keys)
 				end
 			else 
 					--Give first level of summon ghoul
-					RemoveEmptySpell(killer)
+					--RemoveEmptySpell(killer)
 					killer:AddAbility("summon_ghoul")
 					killer:FindAbilityByName("summon_ghoul"):UpgradeAbility()
 			end

@@ -35,8 +35,8 @@
 	{
 		"override_hero"				"npc_dota_hero_night_stalker"				// Hero to override
 		"Ability1"					"empty_spell"								// Ability 1
-		"Ability2"					"empty_spell"								// Ability 2
-		"Ability3"					"empty_spell"								// Ability 3
+		"Ability2"					"banish_life_protector"						// Ability 2
+		"Ability3"					"summon_ghoul"								// Ability 3
 		"Ability4"					"empty_spell"								// Ability 4
 		"VisionNighttimeRange"		"2500"										// Range of vision at night time.
 		"ModelScale"				"0.9"										// Scale of the assigned model
@@ -45,14 +45,12 @@
 	//=================================================================================================================
 	// HERO: Lifestealer
 	//=================================================================================================================
-	"npc_dota_hero_life_stealer_ghoul"
+	"npc_dota_creep_goodguys_melee_summon"
 	{
 		"override_hero"				"npc_dota_hero_life_stealer"				// Hero to override
-		"AbilityLayout"				"0"
-	//	"Ability1"					""											// Ability 1
-	//	"Ability2"					""											// Ability 2
-		"VisionNighttimeRange"		"2500"										// Range of vision at night time.
-		"ModelScale"				"0.8"										// Scale of the assigned model
+		"ModelScale"				"0.7"										// Scale of the assigned model
+		"AbilityLayout"				"0"											// Ability layout of the hero
+	//	"VisionNighttimeRange"		"1800"										// Range of vision at night time.
 	}
 
 	//=================================================================================================================

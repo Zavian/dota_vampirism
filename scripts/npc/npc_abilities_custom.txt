@@ -56,36 +56,10 @@
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"MaxLevel"						"4"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_HERO | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"1"
 		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"            "summon_ghoul"
-	}
-
-	//=================================================================================================================
-	// Summon Ghoul 1
-	//=================================================================================================================
-	"summon_ghoul_1"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"MaxLevel"						"4"
-		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"            "summon_ghoul"
-	}
-
-	//=================================================================================================================
-	// Summon Ghoul 2
-	//=================================================================================================================
-	"summon_ghoul_2"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"MaxLevel"						"4"
-		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"            "summon_ghoul"
+		"AbilityTextureName"            "banish_life_protector"
 	}
 
 	//=================================================================================================================
@@ -99,6 +73,14 @@
 		"MaxLevel"						"2"
 		"BaseClass" 					"ability_datadriven"
 		"AbilityTextureName"            "summon_ghoul"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/datadriven/summon_ghoul.lua"
+				"Function"		"OnSpellStart"
+			}
+		}
 	}
 
 
