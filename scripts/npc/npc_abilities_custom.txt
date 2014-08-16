@@ -88,6 +88,21 @@
 		"AbilityTextureName"            "summon_ghoul"
 	}
 
+	//=================================================================================================================
+	// Summon Ghoul
+	//=================================================================================================================
+	"summon_ghoul"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"2"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "summon_ghoul"
+	}
+
+
+
 
 
 	

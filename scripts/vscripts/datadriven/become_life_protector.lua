@@ -28,27 +28,34 @@ function OnChannelSucceded(keys)
 	if(table.getn(KILLERS) < 4) then		
 		killer = EntIndexToHScript(KILLERS[0])
 		if(killer) then
-			if(killer:FindAbilityByName("summon_ghoul_1")) then
-				if(killer:FindAbilityByName("summon_ghoul_2")) then
-					--Killer has both summon ghouls
+			if(killer:FindAbilityByName("summon_ghoul")) then
+				if(killer:FindAbilityByName("summon_ghoul"):GetLevel() == 2) then
+					--Killer has summon ghoul level 2
 					local whoToBuff = nil
 					if(stalkers[1] == killer) then whoToBuff = stalkers[2]
 					else whoToBuff = stalkers[1]
 					end
 					--whoToBuff = EntIndexToHScript(whoToBuff)
 					RemoveEmptySpell(whoToBuff)
-					if(whoToBuff:FindAbilityByName("summon_ghoul_1")) then whoToBuff:AddAbility("summon_ghoul_2")
-					else whoToBuff:AddAbility("summon_ghoul_1")
+					if(whoToBuff:FindAbilityByName("summon_ghoul")) then 
+						--Give the second level of the summon ghoul
+						whoToBuff:FindAbilityByName("summon_ghoul"):UpgradeAbility()
+					else 
+						--Give first level of the summon ghoul
+						whoToBuff:AddAbility("summon_ghoul")
+						whoToBuff:FindAbilityByName("summon_ghoul"):UpgradeAbility()
+
 					end
 				else 
-					--Killer has first ghoul, but not the second one
-						RemoveEmptySpell(killer)
-						killer:AddAbility("summon_ghoul_2")
+					--Give second level of the summon ghoul
+					--RemoveEmptySpell(killer)
+					killer:FindAbilityByName("summon_ghoul"):UpgradeAbility()
 				end
 			else 
-					--Killer hasn't the first ghoul
+					--Give first level of summon ghoul
 					RemoveEmptySpell(killer)
-					killer:AddAbility("summon_ghoul_1")
+					killer:AddAbility("summon_ghoul")
+					killer:FindAbilityByName("summon_ghoul"):UpgradeAbility()
 			end
 		end
 	else
