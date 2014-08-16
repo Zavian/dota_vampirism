@@ -57,6 +57,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_HERO | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"						"1"
 		"BaseClass" 					"ability_datadriven"
 		"AbilityTextureName"            "banish_life_protector"
@@ -70,6 +71,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"						"2"
 		"BaseClass" 					"ability_datadriven"
 		"AbilityTextureName"            "summon_ghoul"
