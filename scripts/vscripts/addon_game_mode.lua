@@ -102,34 +102,34 @@ function VampirismGameMode:OnEntityKilled(keys)
 	local killer = keys.entindex_attacker
 	print("[OnEntityKilled] "..id.." fired the event...")
 	hscript  = EntIndexToHScript(id)
-	
-	player = hscript:GetPlayerID()
-	isPlayer = hscript:IsPlayer()
 	model = hscript:GetModelName()
-	team = hscript:GetTeam()
+	if(model ~= MODEL_LIFE) then
+		player = hscript:GetPlayerID()
+		isPlayer = hscript:IsPlayer()	
+		team = hscript:GetTeam()
 
-	
+		
 
-	print("[OnEntityKilled] The dead model is ".. model)
-	if (hscript and hscript:IsRealHero() and model == MODEL_OMNI and team == TEAM_RADIANT) then	
-		addKiller(killer)
+		print("[OnEntityKilled] The dead model is ".. model)
+		if (hscript and hscript:IsRealHero() and model == MODEL_OMNI and team == TEAM_RADIANT) then	
+			addKiller(killer)
 
-		PlayerResource:ReplaceHeroWith(player, DEATHPROPHET, 0, 0)		
-		print("[OnEntityKilled] A player has been killed. Changed its model.")
+			PlayerResource:ReplaceHeroWith(player, DEATHPROPHET, 0, 0)		
+			print("[OnEntityKilled] A player has been killed. Changed its model.")
 
-		local table = Entities:FindByClassname(nil, DEATHPROPHET)
-		if(table and table:GetTeam() == TEAM_RADIANT) then
-			local ability = table:FindAbilityByName("death_prophet_become_life_protector")
-			ability:UpgradeAbility()
+			local table = Entities:FindByClassname(nil, DEATHPROPHET)
+			if(table and table:GetTeam() == TEAM_RADIANT) then
+				local ability = table:FindAbilityByName("death_prophet_become_life_protector")
+				ability:UpgradeAbility()
+			end
+
+		elseif (hscript and hscript:IsRealHero() and model == MODEL_NIGHT and team == TEAM_DIRE) then
+			GameRules:SendCustomMessage("You have killed a Vampire!", TEAM_RADIANT, 1)
+			GameRules:SendCustomMessage("A Vampire has been killed!", TEAM_DIRE, 1)
+			print("[OnEntityKilled] A Vampire died. Damn you...")
+
 		end
-
-	elseif (hscript and hscript:IsRealHero() and model == MODEL_NIGHT and team == TEAM_DIRE) then
-		GameRules:SendCustomMessage("You have killed a Vampire!", TEAM_RADIANT, 1)
-		GameRules:SendCustomMessage("A Vampire has been killed!", TEAM_DIRE, 1)
-		print("[OnEntityKilled] A Vampire died. Damn you...")
-
 	end
-
 	print("")
 end	
 

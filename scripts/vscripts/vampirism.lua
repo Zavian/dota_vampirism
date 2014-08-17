@@ -13,7 +13,7 @@ TEAM_RADIANT 	= 2
 
 
 MODEL_DEATH 	= "models/heroes/death_prophet/death_prophet.vmdl"
-MODEL_LIFE 		= "models/heroes/life_Stealer/life_Stealer.vmdl"
+MODEL_LIFE 		= "models/heroes/life_stealer/life_stealer.vmdl"
 MODEL_NIGHT 	= "models/heroes/nightstalker/nightstalker.vmdl"
 MODEL_OMNI 		= "models/heroes/omniknight/omniknight.vmdl"
 MODEL_TREANT 	= "models/heroes/treant_protector/treant_protector.vmdl"

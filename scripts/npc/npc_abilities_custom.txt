@@ -85,6 +85,108 @@
 		}
 	}
 
+	//=================================================================================================================
+	// Summon Ghoul 1
+	//=================================================================================================================
+	"summon_ghoul_1"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"MaxLevel"						"1"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "summon_ghoul"
+		"OnSpellStart"
+		{
+			//"ApplyModifier"
+			//{
+			//	"Target"
+			//	{
+			//		"Center"	"CASTER"
+			//		"Radius"	"%radius"
+			//		"Teams"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			//		"Types"		"DOTA_UNIT_TARGET_HERO"
+			//	}
+			//	"ModifierName"  "modifier_holdout_guardian_angel_buff"
+			//}
+
+			"SpawnUnit"
+			{
+				"UnitName"			"summoned_ghoul"
+				"UnitCount"			"1"
+				"SpawnRadius"		"100"
+				"Target"
+				{
+					"Center"	"CASTER"
+					"Radius"	"100"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+					"Types"		"DOTA_UNIT_TARGET_HERO"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS"
+				}
+				"Duration"		"60"
+				//"OnSpawn"
+				//{
+				//	"ApplyModifier"
+				//	{
+				//		"Target"		"TARGET"
+				//		"ModifierName"  "modifier_holdout_guardian_angel_summoned_buff"
+				//	}
+				//}
+			}
+
+		}
+	}
+
+	//=================================================================================================================
+	// Summon Ghoul 2
+	//=================================================================================================================
+	"summon_ghoul_2"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"MaxLevel"						"1"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "summon_ghoul"
+		"OnSpellStart"
+		{
+			//"ApplyModifier"
+			//{
+			//	"Target"
+			//	{
+			//		"Center"	"CASTER"
+			//		"Radius"	"%radius"
+			//		"Teams"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			//		"Types"		"DOTA_UNIT_TARGET_HERO"
+			//	}
+			//	"ModifierName"  "modifier_holdout_guardian_angel_buff"
+			//}
+
+			"SpawnUnit"
+			{
+				"UnitName"			"summoned_ghoul"
+				"UnitCount"			"2"
+				"SpawnRadius"		"100"
+				"Target"
+				{
+					"Center"	"CASTER"
+					"Radius"	"100"
+					"Teams"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+					"Types"		"DOTA_UNIT_TARGET_HERO"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS"
+				}
+				"Duration"		"60"
+				//"OnSpawn"
+				//{
+				//	"ApplyModifier"
+				//	{
+				//		"Target"		"TARGET"
+				//		"ModifierName"  "modifier_holdout_guardian_angel_summoned_buff"
+				//	}
+				//}
+			}
+
+		}
+	}
+
 
 
 
