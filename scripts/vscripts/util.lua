@@ -61,3 +61,11 @@ function RemoveEmptySpell(entity)
     print("[UTIL] Spell removed")
 end
 
+function SwapSpells(who, whatItHas, whatItNeeds) 
+    if(who:FindAbilityByName(whatItHas)) then
+        who:RemoveAbility(whatItHas)
+        who:AddAbility(whatItNeeds)
+    end
+end
+
+

@@ -25,38 +25,39 @@ function OnChannelSucceded(keys)
 	end
 
 
+	--Just to explain what happens here:
+	--if the vampire hasn't the summon_ghoul_1 level 1 here we level it
+	--if he has the summon_ghoul_1 level 1 we swap it with the summon_ghoul_2 and we level it
+	--if he has the level 2 of the second spell we check if the vampire has summon_ghoul_1 level 1, if not we level that up
+	--if yes we swap it with summon_ghoul_2 and we level it
+	--Kinda difficult to see, but pretty easy as concept.
+
 	if(table.getn(KILLERS) < 4) then		
 		killer = EntIndexToHScript(KILLERS[0])
 		if(killer) then
-			if(killer:FindAbilityByName("summon_ghoul")) then
-				if(killer:FindAbilityByName("summon_ghoul"):GetLevel() == 2) then
-					--Killer has summon ghoul level 2
-					local whoToBuff = nil
-					if(stalkers[1] == killer) then whoToBuff = stalkers[2]
-					else whoToBuff = stalkers[1]
-					end
-					--whoToBuff = EntIndexToHScript(whoToBuff)
-					--RemoveEmptySpell(whoToBuff)
-					if(whoToBuff:FindAbilityByName("summon_ghoul")) then 
-						--Give the second level of the summon ghoul
-						whoToBuff:FindAbilityByName("summon_ghoul"):UpgradeAbility()
-					else 
-						--Give first level of the summon ghoul
-						whoToBuff:AddAbility("summon_ghoul")
-						whoToBuff:FindAbilityByName("summon_ghoul"):UpgradeAbility()
-
-					end
-				else 
-					--Give second level of the summon ghoul
-					--RemoveEmptySpell(killer)
-					killer:FindAbilityByName("summon_ghoul"):UpgradeAbility()
+			if(killer:FindAbilityByName("summon_ghoul_1")) then
+				spellLevel = killer:FindAbilityByName("summon_ghoul_1"):GetLevel()
+				if(spellLevel == 0) then killer:FindAbilityByName("summon_ghoul_1"):UpgradeAbility()
+				elseif(spellLevel == 1) then
+					SwapSpells(killer, "summon_ghoul_1", "summon_ghoul_2")
+					killer:FindAbilityByName("summon_ghoul_2"):UpgradeAbility()
 				end
-			else 
-					--Give first level of summon ghoul
-					--RemoveEmptySpell(killer)
-					killer:AddAbility("summon_ghoul")
-					killer:FindAbilityByName("summon_ghoul"):UpgradeAbility()
-			end
+			elseif(killer:FindAbilityByName("summon_ghoul_2")) then
+				local whoToBuff = nil
+				if(stalkers[1] == killer) then 
+					whoToBuff = stalkers[2]
+				else 
+					whoToBuff = stalkers[1]
+				end
+				if(whoToBuff:FindAbilityByName("summon_ghoul_1")) then
+					spellLevel = whoToBuff:FindAbilityByName("summon_ghoul_1"):GetLevel()
+					if(spellLevel == 0) then whoToBuff:FindAbilityByName("summon_ghoul_1"):UpgradeAbility()
+						elseif(spellLevel == 1) then
+							SwapSpells(whoToBuff, "summon_ghoul_1", "summon_ghoul_2")
+							whoToBuff:FindAbilityByName("summon_ghoul_2"):UpgradeAbility()
+						end
+					end
+				end
 		end
 	else
 		--Must create the event of rage!
