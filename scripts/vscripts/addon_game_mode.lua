@@ -2,6 +2,7 @@
 
 require('util')
 require('vampirism')
+require('buildinghelper') --Wanna thank Myll4 for his awesome library
 
 
 
@@ -31,6 +32,7 @@ function Precache( context )
 		PrecacheUnitByNameSync(ALL[i], context)
 		--print(ALL[i])
 	end
+	PrecacheModel(MODEL_HOME, context)
 	print("[VAMPIRISM] Precached all")
 
 end
@@ -40,12 +42,30 @@ function Activate()
 	GameRules.AddonTemplate = VampirismGameMode()
 	GameRules.AddonTemplate:InitGameMode()
 
-
+	Convars:RegisterCommand( "buildings", Dynamic_Wrap(VampirismGameMode, 'DisplayBuildingGrids'), "blah", 0 )
 	--game rules section
 	--add here to maintain order
 	--GameRules:SetHeroRespawnEnabled(false)
 	GameRules:SetSameHeroSelectionEnabled(true)
 
+end
+
+
+function VampirismGameMode:DisplayBuildingGrids()
+  print( '******* Displaying Building Grids ***************' )
+  local cmdPlayer = Convars:GetCommandClient()
+  if cmdPlayer then
+    local playerID = cmdPlayer:GetPlayerID()
+    if playerID ~= nil and playerID ~= -1 then
+      -- Do something here for the player who called this command
+		for i,v in ipairs(BUILDING_SQUARES) do
+			for i2,v2 in ipairs(v) do
+				BuildingHelper:PrintSquareFromCenterPoint(v2)
+			end
+		end
+    end
+  end
+  print( '*********************************************' )
 end
 
 function VampirismGameMode:InitGameMode()
@@ -62,8 +82,12 @@ function VampirismGameMode:InitGameMode()
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(VampirismGameMode, 'OnEntityKilled'), self)
 	print("[BRAIN] Looking for dead ppl")
 
+	
+	ListenToGameEvent('dota_player_update_selected_unit', Dynamic_Wrap(VampirismGameMode, 'OnChangeSelectedUnit'), self)
 	--ListenToGameEvent('player_spawn', Dynamic_Wrap(VampirismGameMode, 'OnPlayerSpawn'), self)
 
+	BuildingHelper:BlockGridNavSquares(MAP_SIZE)
+	
 	print("")
 end
 
@@ -83,6 +107,14 @@ function VampirismGameMode:OnThink()
 
 
 	return 1
+end
+
+function VampirismGameMode:OnChangeSelectedUnit(keys)
+	
+	PrintTable(keys)
+	print("")
+
+	
 end
 
 --function VampirismGameMode:OnDotaPlayerKilled(keys) 

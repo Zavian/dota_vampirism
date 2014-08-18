@@ -1,6 +1,7 @@
 print("[VAMPIRISM] Lua loaded")
 TEAM_DIRE		= 3
 TEAM_RADIANT 	= 2
+MAP_SIZE		= 8164*2
 
 --local creature = CreateUnitByName(NIGHTSTALKER, caster:GetAbsOrigin(), true, nil, nil, TEAM_DIRE) 
 --creature:SetOwner(PlayerResource:GetPlayer(0))
@@ -17,6 +18,8 @@ MODEL_LIFE 		= "models/heroes/life_stealer/life_stealer.vmdl"
 MODEL_NIGHT 	= "models/heroes/nightstalker/nightstalker.vmdl"
 MODEL_OMNI 		= "models/heroes/omniknight/omniknight.vmdl"
 MODEL_TREANT 	= "models/heroes/treant_protector/treant_protector.vmdl"
+
+MODEL_HOME		= "models/buildings/building_plain_reference.vmdl"
 
 OMNI 			= "npc_dota_hero_omniknight"
 NIGHTSTALKER 	= "npc_dota_hero_night_stalker"
