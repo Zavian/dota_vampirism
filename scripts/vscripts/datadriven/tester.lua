@@ -5,6 +5,10 @@
 -- 4 = Events?
 -- 5 = ???
 
+function test(keys)
+	print("Casted tested spell")
+end
+
 --Spell with test purposes
 function OnSpellStart(keys)
 	local caster = keys.caster
