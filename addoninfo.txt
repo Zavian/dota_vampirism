@@ -2,5 +2,5 @@
 {
      "maps"			"map1"
      "IsPlayable"	"1"
-     "addontitle"	"Vampirism Domination"
+     "addontitle"		"Banana"
 }

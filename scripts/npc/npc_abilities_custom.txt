@@ -41,8 +41,8 @@
 			"RunScript"
 			{
 				"Target"				"POINT"
-				"ScriptFile"			"scripts/vscripts/datadriven/human.lua"
-				"Function"				"BuildWall"
+				"ScriptFile"			"scripts/vscripts/datadriven/summon_building.lua"
+				"Function"				"getBuildingPoint"
 			}
 		}
 
@@ -73,16 +73,16 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"scripts/vscripts/datadriven/human.lua"
-				"Function"		"BecomingLifeProtector"
+				"ScriptFile"	"scripts/vscripts/datadriven/become_life_protector.lua"
+				"Function"		"OnSpellStart"
 			}
 		}
 		"OnChannelSucceeded"
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"scripts/vscripts/datadriven/human.lua"
-				"Function"		"BecomeLifeProtector"
+				"ScriptFile"	"scripts/vscripts/datadriven/become_life_protector.lua"
+				"Function"		"OnChannelSucceded"
 			}
 		}
 	}
@@ -102,11 +102,33 @@
 	}
 
 	//=================================================================================================================
+	// Summon Ghoul
+	//=================================================================================================================
+	"summon_ghoul"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"MaxLevel"						"2"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "summon_ghoul"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/datadriven/summon_ghoul.lua"
+				"Function"		"OnSpellStart"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Summon Ghoul 1
 	//=================================================================================================================
 	"summon_ghoul_1"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"						"1"
 		"BaseClass" 					"ability_datadriven"
@@ -139,14 +161,14 @@
 					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS"
 				}
 				"Duration"		"60"
-				"OnSpawn"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"scripts/vscripts/datadriven/vampire.lua"
-						"Function"		"SummonedGhoul"
-					}
-				}
+				//"OnSpawn"
+				//{
+				//	"ApplyModifier"
+				//	{
+				//		"Target"		"TARGET"
+				//		"ModifierName"  "modifier_holdout_guardian_angel_summoned_buff"
+				//	}
+				//}
 			}
 
 		}
@@ -190,36 +212,159 @@
 					"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS"
 				}
 				"Duration"		"60"
+				//"OnSpawn"
+				//{
+				//	"ApplyModifier"
+				//	{
+				//		"Target"		"TARGET"
+				//		"ModifierName"  "modifier_holdout_guardian_angel_summoned_buff"
+				//	}
+				//}
+			}
+
+		}
+	}
+
+
+
+
+
+	
+
+
+	
+	//=================================================================================================================
+	// Omniknight Summon house
+	// Test purposes
+	//=================================================================================================================
+	"omniknight_summon_angel"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"omniknight_guardian_angel"
+		"ItemBaseLevel"					"0"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"5 5 5 5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"1 1 1 1"
+
+		"precache"
+		{
+			"particle_folder" "particles/econ/generic/generic_buff_1"
+		}
+
+		
+		"OnSpellStart"
+		{
+			//"ApplyModifier"
+			//{
+			//	"Target"
+			//	{
+			//		"Center"	"CASTER"
+			//		"Radius"	"100"
+			//		"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+			//		"Types"		"DOTA_UNIT_TARGET_HERO"
+			//	}
+			//	"ModifierName"  "modifier_good_summon"
+			//}
+
+			"SpawnUnit"
+			{
+				"UnitName"			"npc_dota_hero_life_stealer"
+				"UnitCount"			"3"
+				"SpawnRadius"		"100"
+				"Duration"			"15"
+
+				//"Target"
+				//{
+				//	"Center"	"CASTER"
+				//	"Radius"	"100"
+				//	"Teams"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				//	"Types"		"DOTA_UNIT_TARGET_HERO"
+				//	"Flags"		"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS"
+				//}
+				
 				"OnSpawn"
 				{
-					"RunScript"
+					"ApplyModifier"
 					{
-						"ScriptFile"	"scripts/vscripts/datadriven/vampire.lua"
-						"Function"		"SummonedGhoul"
+						"Target"		"TARGET"
+						"ModifierName"  "modifier_good_summon_buff"
 					}
 				}
 			}
 
+			"FireSound"
+			{
+				"EffectName"			"Hero_Omniknight.GuardianAngel.Cast"
+				"Target"				"CASTER"
+			}
 		}
-	}
 
 
-	//=================================================================================================================
-	// Ghoul: Unholy Aura (Minus Armor)
-	//=================================================================================================================
-	"ghoul_unholy_aura"
-	{
-		"BaseClass"						"nevermore_dark_lord"
-		"AbilityTextureName"			"ghoul_unholy_aura"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"OnCastbar"						"0"
-		"MaxLevel"						"10"
-		
-		
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"900"
+		"Modifiers"
+		{
+			"modifier_good_summon"
+			{
+				"Duration" "15"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL"	"1"
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"5"
+				}
+			}
+
+			"modifier_good_summon_buff"
+			{
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"Target"	"TARGET"
+						"EffectName" "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_ally.vpcf"
+						"EffectAttachType" "follow_origin"
+						"EffectRadius"	"0.5"
+					}
+					"AttachEffect"
+					{
+						"Target" "TARGET"
+						"EffectName" "particles/econ/generic/generic_buff_1/generic_buff_1.vpcf"
+						"EffectAttachType" "follow_origin"
+						"EffectColorA" "250 250 250"
+						"EffectAlphaScale" "2"
+					}
+					"AttachEffect"
+					{
+						"Target" "TARGET"
+						"EffectName" "particles/econ/generic/generic_buff_1/generic_buff_1.vpcf"
+						"EffectAttachType" "follow_origin"
+						"EffectColorA" "250 250 250"
+						"EffectAlphaScale" "2"
+					}
+					"FireSound"
+					{
+						"EffectName"			"Hero_Omniknight.GuardianAngel"
+						"Target"				"TARGET"
+					}
+				}
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL" "1"
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"		"55"
+				}
+			}
+		}
+
 
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
@@ -227,154 +372,25 @@
 		{
 			"01"
 			{
-				"var_type"						"FIELD_INTEGER"
-				"presence_armor_reduction"		"-3 -6 -9 -12 -15 -18 -21 -24 -27 -30"
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"10.0 11.0 12.0"
 			}
 			"02"
 			{
-				"var_type"						"FIELD_INTEGER"
-				"presence_radius"				"900"
-			}
-		}
-	}
-
-	//=================================================================================================================
-	// Ghoul: Damage Aura
-	//=================================================================================================================
-	"ghoul_damage_aura"
-	{
-		"BaseClass"						"vengefulspirit_command_aura"
-		"AbilityTextureName"			"ghoul_damage_aura"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"OnCastbar"						"0"
-		"MaxLevel"						"10"
-		
-		
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"900"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"aura_radius"		"900"
-			}
-			"02"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"bonus_damage_pct"	"5 10 15 20 25 30 35 40 45 50"
-			}
-		}
-	}
-
-	//=================================================================================================================
-	// Ghoul: Speed Aura (Movement Speed)
-	//=================================================================================================================
-	"ghoul_mov_speed_aura"
-	{
-		"BaseClass"						"spirit_breaker_empowering_haste"
-		"AbilityTextureName"			"ghoul_speed_aura"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"OnCastbar"						"0"
-		"MaxLevel"						"10"
-		
-		
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"900"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_movespeed_pct"	"5 10 15 20 25 30 35 40 45 50"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_damage_pct"		"0"
+				"var_type"					"FIELD_INTEGER"
+				"health_regen"				"25 25 25"
 			}
 			"03"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"aura_radius"			"900"
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"10000"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"angel_damage"				"150 250 350"
 			}
 		}
 	}
 
-	//=================================================================================================================
-	// Ghoul: Speed Aura (Attack Speed)
-	//=================================================================================================================
-	"ghoul_atk_speed_aura"
-	{
-		"BaseClass"						"beastmaster_inner_beast"
-		"AbilityTextureName"			"ghoul_speed_aura"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"MaxLevel"						"10"
-		
-		
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"900"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"radius"				"900"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_attack_speed"	"5 10 15 20 25 30 35 40 45 50"
-			}
-		}
-	}
-
-	//=================================================================================================================
-	// Ghoul: Devotion Aura (Plus Amor)
-	//=================================================================================================================
-	"ghoul_armor_aura"
-	{
-		"BaseClass"						"enraged_wildkin_toughness_aura"
-		"AbilityTextureName"			"ghoul_armor_aura"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"OnCastbar"						"0"
-		"MaxLevel"						"10"
-		
-		
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"900"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"bonus_armor"		"5 10 15 20 25 30 35 40 45 50"
-			}
-			"02"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"radius"			"900"
-			}
-		}
-	}
 }
