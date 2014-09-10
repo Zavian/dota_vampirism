@@ -35,11 +35,18 @@
 	//=================================================================================================================
 	"npc_dota_hero_night_stalker_vampire"
 	{
+		"Level"						"3"
 		"override_hero"				"npc_dota_hero_night_stalker"				// Hero to override
-		"Ability1"					"empty_spell"								// Ability 1
-		"Ability2"					"banish_life_protector"						// Ability 2
-		"Ability3"					"summon_ghoul_1"							// Ability 3
-		"Ability4"					"empty_spell"								// Ability 4
+		"AbilityLayout"				"7"
+
+		"Ability1"					"shadow_sight"								// Ability 1
+		"Ability2"					"veil_of_darkness"							// Ability 2
+		"Ability3"					"critical_strike"							// Ability 3
+		"Ability4"					"health_beam"								// Ability 4
+		"Ability5"					"chain_of_death"							// Ability 5
+		"Ability6"					"banish_life_protector"						// Ability 6
+		"Ability7"					"summon_ghoul_1"							// Ability 7
+
 		"VisionNighttimeRange"		"2500"										// Range of vision at night time.
 		"ModelScale"				"0.9"										// Scale of the assigned model
 	}

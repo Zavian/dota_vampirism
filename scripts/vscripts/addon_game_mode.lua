@@ -3,6 +3,7 @@
 require('util')
 require('vampirism')
 require('buildinghelper') --Wanna thank Myll4 for his awesome library
+require('timers') --Wanna thank BMD for his awesome library
 
 
 
@@ -135,7 +136,8 @@ function VampirismGameMode:OnEntityKilled(keys)
 	print("[OnEntityKilled] "..id.." fired the event...")
 	hscript  = EntIndexToHScript(id)
 	model = hscript:GetModelName()
-	if(model ~= MODEL_LIFE) then
+	unit = hscript:GetUnitName()
+	if(model ~= MODEL_LIFE and not string.match(unit, "dummy")) then
 		player = hscript:GetPlayerID()
 		isPlayer = hscript:IsPlayer()	
 		team = hscript:GetTeam()
